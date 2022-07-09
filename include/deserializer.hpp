@@ -8,18 +8,21 @@
 
 #include "entry.hpp"
 
-template<auto Reader>
+template<typename Reader>
 class Deserializer {
  public:
+  Deserializer(Reader reader)
+    : _reader(std::move(reader)) {}
+
   template<typename... Entries>
   void deserialize(Entries&... entries) const {
-    auto [name, eos] = Reader.read();
+    auto [name, eos] = _reader.nextEntryName();
 
     while (!eos && name != "-") {
       if (!this->processNamedEntries(name, entries...)) {
         std::cout << "Not found" << std::endl;
       };
-      std::tie(name, eos) = Reader.read();
+      std::tie(name, eos) = _reader.nextEntryName();
     }
   }
 
@@ -50,7 +53,7 @@ class Deserializer {
   bool processNamedEntry(const std::string& name, Entry<T>& entry) const {
     if (entry.name == name) {
       std::cout << name << ": ";
-      Reader.value(entry.value);
+      _reader.value(entry.value);
       return true;
     }
 
@@ -61,6 +64,12 @@ class Deserializer {
   void deserializeTuple(Entries& entries, [[maybe_unused]] std::index_sequence<Is...> seq) const {
     this->deserialize(get<Is>(entries)...);
   }
+
+ private:
+  Reader _reader;
 };
+
+template<typename Reader>
+Deserializer(Reader) -> Deserializer<Reader>;
 
 #endif // !CPPDICT_DESERIALIZER

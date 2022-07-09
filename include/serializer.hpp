@@ -6,9 +6,12 @@
 
 #include "entry.hpp"
 
-template<auto Writer>
+template<typename Writer>
 class Serializer {
  public:
+  Serializer(Writer writer)
+    : _writer(std::move(writer)) {}
+
   template<typename Entry, typename... Args>
   void serialize(const Entry& entry, const Args&... args) {
     this->serializeEntry(entry);
@@ -20,15 +23,21 @@ class Serializer {
  private:
   template<typename... Args>
   void serializeEntry(const Entry<std::tuple<Args...>>& entry) {
-    Writer.writeStartElement(entry.name);
+    _writer.writeStartElement(entry.name);
     std::apply([this](const auto&... entries) { this->serialize(entries...); }, entry.value);
-    Writer.writeEndElement();
+    _writer.writeEndElement();
   }
 
   template<typename T>
   void serializeEntry(const Entry<T>& entry) {
-    Writer.write(entry.name, entry.value);
+    _writer.write(entry.name, entry.value);
   }
+
+ private:
+  Writer _writer;
 };
+
+template<typename Writer>
+Serializer(Writer) -> Serializer<Writer>;
 
 #endif // !CPPDICT_SERIALIZER_HPP
