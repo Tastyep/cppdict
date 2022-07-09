@@ -62,4 +62,5 @@ class Deserializer {
     this->deserialize(get<Is>(entries)...);
   }
 };
+
 #endif // !CPPDICT_DESERIALIZER
