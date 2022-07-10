@@ -12,6 +12,7 @@ int main() {
                     std::tuple{
                       Entry("Int", 5),
                       Entry("Str", "Test"),
+                      Entry("Vec", std::vector<int>{}),
                       Entry("Child",
                             std::tuple{
                               Entry("Bool", true),

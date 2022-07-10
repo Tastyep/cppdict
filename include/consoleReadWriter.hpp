@@ -38,14 +38,29 @@ struct CoutWriter {
     std::cout << gIndent << "'" << name << "' (void)" << std::endl;
   }
 
-  void writeStartElement(std::string_view name) {
+  template<typename T>
+  void writeValue(const T& value) {
+    std::cout << gIndent << value << std::endl;
+  }
+
+  void writeObjStartElement(std::string_view name) {
     std::cout << gIndent << "'" << name << "' : {" << std::endl;
     this->addIndent(2);
   }
 
-  void writeEndElement() {
+  void writeObjEndElement() {
     this->addIndent(-2);
     std::cout << gIndent << "}" << std::endl;
+  }
+
+  void writeArrayStartElement(std::string_view name) {
+    std::cout << gIndent << "'" << name << "' : [" << std::endl;
+    this->addIndent(2);
+  }
+
+  void writeArrayEndElement() {
+    this->addIndent(-2);
+    std::cout << gIndent << "]" << std::endl;
   }
 
   void addIndent(int amount) {
@@ -61,20 +76,40 @@ struct CinReader {
 
   [[nodiscard]] std::pair<std::string, bool> nextEntryName() const {
     std::string str;
+
     std::cin >> str;
-    return { std::move(str), std::cin.eof() };
+    const bool noValue = std::cin.eof() || str == "-";
+
+    return { std::move(str), noValue };
   }
 
-  void value(std::integral auto& value) const {
-    value = std::stoi(readInput(prefix));
+  bool loadNextEntry() const {
+    std::cout << "Next Entry [+/-]: ";
+    const auto& [_, eof] = this->nextEntryName();
+    return !eof;
   }
 
-  void value(bool& value) const {
-    value = readInput(prefix) == "True";
+  bool value(auto& value) const {
+    const auto& [input, eof] = this->nextEntryName();
+    if (eof) {
+      return false;
+    }
+
+    this->setValue(value, input);
+    return true;
   }
 
-  void value(std::string& value) const {
-    value = readInput(prefix);
+ private:
+  void setValue(std::integral auto& value, const std::string& input) const {
+    value = std::stoi(input);
+  }
+
+  void setValue(bool& value, const std::string& input) const {
+    value = input == "True";
+  }
+
+  void setValue(std::string& value, const std::string& input) const {
+    value = input;
   }
 };
 

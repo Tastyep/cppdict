@@ -5,6 +5,7 @@
 #include <string>
 #include <tuple>
 #include <utility>
+#include <vector>
 
 #include "entry.hpp"
 
@@ -18,7 +19,7 @@ class Deserializer {
   void deserialize(Entries&... entries) const {
     auto [name, eos] = _reader.nextEntryName();
 
-    while (!eos && name != "-") {
+    while (!eos) {
       if (!this->processNamedEntries(name, entries...)) {
         std::cout << "Not found" << std::endl;
       };
@@ -29,9 +30,11 @@ class Deserializer {
  private:
   template<typename Entry, typename... Entries>
   bool processNamedEntries(const std::string& name, Entry& entry, Entries&... entries) const {
-    if (this->processNamedEntry(name, entry)) {
+    if (name == entry.name) {
+      this->processEntry(entry);
       return true;
     }
+
     if constexpr (sizeof...(entries) > 0) {
       return this->processNamedEntries(name, entries...);
     }
@@ -39,30 +42,30 @@ class Deserializer {
   }
 
   template<typename... Args>
-  bool processNamedEntry(const std::string& name, Entry<std::tuple<Args...>>& entry) const {
-    if (entry.name == name) {
-      std::cout << name << " {" << std::endl;
-      this->deserializeTuple(entry.value, std::make_index_sequence<sizeof...(Args)>{});
-      return true;
-    }
-
-    return false;
+  void processEntry(Entry<std::tuple<Args...>>& entry) const {
+    std::cout << entry.name << " {" << std::endl;
+    std::apply([this](auto&... entries) { this->deserialize(entries...); }, entry.value);
   }
 
   template<typename T>
-  bool processNamedEntry(const std::string& name, Entry<T>& entry) const {
-    if (entry.name == name) {
-      std::cout << name << ": ";
-      _reader.value(entry.value);
-      return true;
+  void processEntry(Entry<std::vector<T>>& entry) const {
+    std::cout << "[" << std::endl;
+    auto& entries = entry.value;
+    while (_reader.loadNextEntry()) {
+      T newEntry;
+      this->processEntry(newEntry);
+      entries.push_back(std::move(newEntry));
     }
-
-    return false;
   }
 
-  template<typename Entries, std::size_t... Is>
-  void deserializeTuple(Entries& entries, [[maybe_unused]] std::index_sequence<Is...> seq) const {
-    this->deserialize(get<Is>(entries)...);
+  template<typename T>
+  void processEntry(Entry<T>& entry) const {
+    std::cout << entry.name << ": ";
+    this->processEntry(entry.value);
+  }
+
+  void processEntry(auto& entry) const {
+    _reader.value(entry);
   }
 
  private:
