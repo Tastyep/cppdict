@@ -18,4 +18,7 @@ concept Deserializable = requires(T obj, Deserializer& deserializer) {
 template<typename T>
 concept Collection = std::ranges::range<T> and not std::is_same_v<std::string, T>;
 
+template<typename T, typename... U>
+concept IsAnyOf = (std::same_as<T, U> || ...);
+
 #endif // !CPPDICT_CONCEPTS_HPP

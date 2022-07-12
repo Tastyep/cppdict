@@ -2,10 +2,13 @@
 #define CPPDICT_CONSOLE_READ_WRITER_HPP
 
 #include <concepts>
+#include <ios>
 #include <iostream>
 #include <string>
 #include <string_view>
 #include <utility>
+
+#include "concepts.hpp"
 
 std::string readInput(std::string_view prefix) {
   std::string input;
@@ -15,14 +18,18 @@ std::string readInput(std::string_view prefix) {
   return input;
 }
 
+template<typename T>
+concept Unspecified = not std::integral<T> and not IsAnyOf<T, std::string, bool>;
+
 struct CoutWriter {
  public:
-  void write(std::string_view name, const std::integral auto value) {
+  void write(std::string_view name, std::integral auto value) {
     std::cout << gIndent << "'" << name << "' (integral) : " << value << std::endl;
   }
 
   void write(std::string_view name, bool value) {
-    std::cout << gIndent << "'" << name << "' (bool) : " << value << std::endl;
+    std::cout << gIndent << "'" << name << "' (bool) : " << std::boolalpha << value
+              << std::endl;
   }
 
   void write(std::string_view name, const std::string& value) {
@@ -30,7 +37,7 @@ struct CoutWriter {
               << "\"" << value << "\"" << std::endl;
   }
 
-  void write(std::string_view name, const auto& value) {
+  void write(std::string_view name, const Unspecified auto& value) {
     std::cout << gIndent << "'" << name << "' (T) : " << value << std::endl;
   }
 
