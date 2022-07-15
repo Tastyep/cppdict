@@ -4,6 +4,9 @@
 #include "deserializer.hpp"
 #include "serializer.hpp"
 
+template<typename T>
+using ref = std::reference_wrapper<T>;
+
 class NamedData {
  public:
   static constexpr auto EntryName = "OtherData";
@@ -60,6 +63,16 @@ int main() {
                               Entry("Bool", true),
                             }),
                     });
+  auto otherTree = Entry("Root",
+                         std::tuple{
+                           Entry("int", 6),
+                         });
+
+  // Read only
+  std::cout << *tree.get<int>("Root.Int") << std::endl;
+
+  // Read / Write
+  tree.get<ref<int>>("Root.Int")->get() = 21;
 
   serializer.serialize(tree);
 
