@@ -19,7 +19,7 @@ std::string readInput(std::string_view prefix) {
 }
 
 template<typename T>
-concept Unspecified = not std::integral<T> and not IsAnyOf<T, std::string, bool>;
+concept Unspecified = not std::integral<T> and not Detail::IsAnyOf<T, std::string, bool>;
 
 struct CoutWriter {
  public:

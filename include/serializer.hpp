@@ -14,24 +14,24 @@ class Serializer {
  public:
   Serializer(Writer writer)
     : _writer(std::move(writer)) {}
-  template<typename Entry, typename... Args>
-  void serialize(const Entry& entry, const Args&... args) {
+  template<typename Entry, typename... Entries>
+  void serialize(const Entry& entry, const Entries&... entries) {
     this->serializeEntry(entry);
-    if constexpr (sizeof...(args) > 0) {
-      this->serialize(args...);
+    if constexpr (sizeof...(entries) > 0) {
+      this->serialize(entries...);
     }
   }
 
  private:
-  template<typename... Args>
-  void serializeEntry(const Entry<std::tuple<Args...>>& entry) {
+  template<StringLiteral Name, typename... Entries>
+  void serializeEntry(const Entry<Name, std::tuple<Entries...>>& entry) {
     _writer.writeObjStartElement(entry.name);
     std::apply([this](const auto&... entries) { this->serialize(entries...); }, entry.value);
     _writer.writeObjEndElement();
   }
 
-  template<Collection Range>
-  void serializeEntry(const Entry<Range>& entry) {
+  template<StringLiteral Name, Detail::Collection Range>
+  void serializeEntry(const Entry<Name, Range>& entry) {
     _writer.writeArrayStartElement(entry.name);
     for (const auto& entry : entry.value) {
       this->serializeEntry(entry);
@@ -39,13 +39,14 @@ class Serializer {
     _writer.writeArrayEndElement();
   }
 
-  template<typename T>
-  void serializeEntry(const Entry<T>& entry) {
+  template<StringLiteral Name, typename T>
+  requires(!Serializable<T, Serializer<Writer>> &&
+           !Detail::Collection<T>) void serializeEntry(const Entry<Name, T>& entry) {
     _writer.write(entry.name, entry.value);
   }
 
-  template<Serializable<Serializer<Writer>> T>
-  void serializeEntry(const Entry<T>& entry) {
+  template<StringLiteral Name, Serializable<Serializer<Writer>> T>
+  void serializeEntry(const Entry<Name, T>& entry) {
     _writer.writeObjStartElement(entry.name);
     entry.value.serialize(*this);
     _writer.writeObjEndElement();

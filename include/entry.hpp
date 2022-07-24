@@ -9,121 +9,126 @@
 #include <utility>
 
 #include "concepts.hpp"
+#include "stringLiteral.hpp"
 
-template<typename Type>
-struct Entry {
+template<StringLiteral EntryName, typename Type>
+class Entry {
+ public:
   using type = Type;
+  static constexpr std::string_view name = EntryName;
 
-  constexpr explicit Entry(std::string_view name, Type value)
-    : name(name)
-    , value(std::move(value)) {}
+  constexpr explicit Entry(Type value)
+    : value(std::move(value)) {}
 
-  template<typename T>
-  std::optional<T> get(const char* path) {
-    return this->get<T>(std::string_view(path));
+  template<StringLiteral Path>
+  constexpr auto& get() {
+    return this->get<Path, std::true_type>();
   }
 
-  template<typename T>
-  std::optional<T> get(std::string_view path) {
-    const auto pos = path.find('.');
-
-    if (pos == path.npos) {
-      return path == this->name //
-               ? this->get<T>(this->value)
-               : std::optional<T>();
-    }
-
-    const auto token = path.substr(0, pos);
-    return token == this->name //
-             ? this->get<T>(path.substr(pos + 1), this->value)
-             : std::optional<T>();
+  template<StringLiteral Path, Detail::Invalid PathParsing>
+  constexpr auto& get() {
+    return this->get<Path>(this->value);
   }
 
  private:
-  template<typename T, typename... Entries>
-  std::optional<T> get(std::string_view path, std::tuple<Entries...>& entries) {
-    const auto pos = path.find('.');
+  template<StringLiteral Path, Detail::Valid PathParsing>
+  constexpr auto& get() {
+    constexpr std::string_view view = Path;
+    constexpr auto pos = view.find('.');
+    constexpr auto key = view.substr(0, pos);
+    constexpr auto path = view.substr(pos == view.npos ? view.size() : pos + 1);
+    constexpr bool nameMatch = EntryName == key;
+    return this->get<std::bool_constant<nameMatch>,
+                     std::bool_constant<!path.empty()>,
+                     StringLiteral<path.length()>(path.data())>();
+  }
 
-    if (pos == path.npos) {
-      return std::apply( //
-        [this, &path](auto&... entries) { return this->get<T>(path, entries...); },
-        entries);
-    }
+  template<Detail::Valid Match, Detail::Valid PathLength, StringLiteral Path>
+  constexpr auto& get() {
+    return this->get<Path>(this->value);
+  }
 
-    const auto token = path.substr(0, pos);
+  template<Detail::Valid Match, Detail::Invalid PathLength, StringLiteral Path>
+  constexpr auto& get() {
+    return this->value;
+  }
+
+  template<StringLiteral Path, typename... Entries>
+  constexpr auto& get(std::tuple<Entries...>& entries) {
+    constexpr std::string_view view = Path;
+    constexpr auto pos = view.find('.');
+    constexpr auto name = view.substr(0, pos);
+    constexpr auto path = view.substr(pos == view.npos ? view.size() : pos + 1);
+
     return std::apply( //
-      [this, &token, &path](auto&... entries) {
-        return this->get<T>(token, path, entries...);
+      [this, &name, &path](auto&... entries) -> auto& {
+        return this->get<StringLiteral<name.length()>(name.data()),
+                         std::bool_constant<!path.empty()>,
+                         StringLiteral<path.length()>(path.data())>(entries...);
       },
       entries);
   }
 
-  template<typename T, typename U, typename... Entries>
-  std::optional<T> get(std::string_view token, Entry<U>& entry, Entries&... entries) {
-    auto result = entry.template get<T>(token);
-    if (result) {
-      return result;
-    }
-
-    if constexpr (sizeof...(entries) > 0) {
-      return this->get<T>(token, entries...);
-    }
-    return {};
+  template<StringLiteral Key,
+           typename PathLength,
+           StringLiteral Path,
+           StringLiteral Name,
+           typename T,
+           typename... Entries>
+  constexpr auto& get(Entry<Name, T>& entry, Entries&... entries) {
+    constexpr bool nameMatch = Name == Key;
+    return this->get<std::bool_constant<nameMatch>, Key, PathLength, Path>(entry, entries...);
   }
 
-  template<typename T, typename U, typename... Entries>
-  std::optional<T> get(std::string_view token, std::string_view path, Entry<U>& entry,
-                       Entries&... entries) {
-    if (entry.name == token) {
-      return entry.template get<T>(path);
-    }
-    if constexpr (sizeof...(entries) > 0) {
-      return this->get<T>(token, path, entries...);
-    }
-    return {};
+  template<Detail::Valid Match,
+           StringLiteral Key,
+           Detail::Valid PathLength,
+           StringLiteral Path,
+           typename Entry,
+           typename... Entries>
+  constexpr auto& get(Entry& entry, Entries&... entries) {
+    return entry.template get<Path, std::false_type>();
   }
 
-  template<typename T>
-  std::optional<T> get(Entry<T>& entry) {
+  template<Detail::Valid Match,
+           StringLiteral Key,
+           Detail::Invalid PathLength,
+           StringLiteral Path,
+           typename Entry,
+           typename... Entries>
+  constexpr auto& get(Entry& entry, Entries&... entries) {
     return entry.value;
   }
 
-  template<typename T>
-  std::optional<T> get(T& value) {
-    return value;
+  template<Detail::Invalid Match,
+           StringLiteral Key,
+           typename PathLength,
+           StringLiteral Path,
+           typename Entry,
+           typename... Entries>
+  constexpr auto& get(Entry& entry, Entries&... entries) {
+    return this->get<Key, PathLength, Path>(entries...);
   }
 
-  template<typename T, typename U>
-  std::optional<T> get(U& value) requires(std::is_same_v<T, std::reference_wrapper<U>>) {
-    return std::ref(value);
-  }
+  // Invalid cases
 
-  template<typename T, typename U>
-  std::optional<T> get(U& entry) requires(!IsAnyOf<T, U, std::reference_wrapper<U>>) {
-    return {};
-  }
-
-  template<typename T, typename U>
-  std::optional<T> get(std::string_view path, U& entry) {
-    return {};
-  }
-
-  template<typename T>
-  std::optional<T> get(std::string_view token, std::string_view path, T& entry) {
-    return {};
+  template<StringLiteral Key, typename PathLength, StringLiteral Path>
+  constexpr auto& get() {
+    static_assert(Key.empty(), "Key not found in tuple");
   }
 
  public:
-  std::string_view name;
   Type value;
 };
 
-// Deduction guides
+template<StringLiteral Name, typename Type>
+constexpr auto makeEntry(const Type& type) {
+  return Entry<Name, Type>(type);
+}
 
-template<typename Type>
-Entry(std::string_view, const Type&) -> Entry<Type>;
-
-template<unsigned N>
-Entry(std::string_view, const char (&)[N]) -> Entry<std::string>;
+template<StringLiteral Name>
+constexpr auto makeEntry(const char* str) {
+  return Entry<Name, std::string>(std::string(str));
+}
 
 #endif // !CPPDICT_ENTRY_HPP
