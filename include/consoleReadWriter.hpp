@@ -9,6 +9,7 @@
 #include <utility>
 
 #include "concepts.hpp"
+#include "serializer.hpp"
 
 std::string readInput(std::string_view prefix) {
   std::string input;
@@ -24,58 +25,71 @@ concept Unspecified = not std::integral<T> and not Detail::IsAnyOf<T, std::strin
 struct CoutWriter {
  public:
   void write(std::string_view name, std::integral auto value) {
-    std::cout << gIndent << "'" << name << "' (integral) : " << value << std::endl;
+    std::cout << _indent << "'" << name << "' (integral) : " << value << std::endl;
   }
 
   void write(std::string_view name, bool value) {
-    std::cout << gIndent << "'" << name << "' (bool) : " << std::boolalpha << value
+    std::cout << _indent << "'" << name << "' (bool) : " << std::boolalpha << value
               << std::endl;
   }
 
   void write(std::string_view name, const std::string& value) {
-    std::cout << gIndent << "'" << name << "' (string) : "
+    std::cout << _indent << "'" << name << "' (string) : "
               << "\"" << value << "\"" << std::endl;
   }
 
   void write(std::string_view name, const Unspecified auto& value) {
-    std::cout << gIndent << "'" << name << "' (T) : " << value << std::endl;
+    std::cout << _indent << "'" << name << "' (T) : " << value << std::endl;
   }
 
   void write(std::string_view name) {
-    std::cout << gIndent << "'" << name << "' (void)" << std::endl;
+    std::cout << _indent << "'" << name << "' (void)" << std::endl;
   }
 
   template<typename T>
   void writeValue(const T& value) {
-    std::cout << gIndent << value << std::endl;
+    std::cout << _indent << value << std::endl;
   }
 
   void writeObjStartElement(std::string_view name) {
-    std::cout << gIndent << "'" << name << "' : {" << std::endl;
+    std::cout << _indent << "'" << name << "' : {" << std::endl;
     this->addIndent(2);
   }
 
   void writeObjEndElement() {
     this->addIndent(-2);
-    std::cout << gIndent << "}" << std::endl;
+    std::cout << _indent << "}" << std::endl;
   }
 
   void writeArrayStartElement(std::string_view name) {
-    std::cout << gIndent << "'" << name << "' : [" << std::endl;
+    std::cout << _indent << "'" << name << "' : [" << std::endl;
     this->addIndent(2);
   }
 
   void writeArrayEndElement() {
     this->addIndent(-2);
-    std::cout << gIndent << "]" << std::endl;
+    std::cout << _indent << "]" << std::endl;
   }
 
   void addIndent(int amount) {
-    int indent = gIndent.size() + amount;
-    gIndent = std::string(indent, ' ');
+    int indent = _indent.size() + amount;
+    _indent = std::string(indent, ' ');
   }
 
-  std::string gIndent;
+  void writeAttr(std::string_view name, const auto& value) {
+    std::cout << "'" << name << "': " << value;
+  }
+
+  void writeAttrStartElement() {
+    std::cout << _indent << "  -> ATTRS: [ ";
+  }
+
+  void writeAttrEndElement() {
+    std::cout << " ]" << std::endl;
+  }
+
+ private:
+  std::string _indent;
 };
 
 struct CinReader {
@@ -97,12 +111,24 @@ struct CinReader {
   }
 
   bool value(auto& value) const {
+    std::cout << "Value: ";
     const auto& [input, eof] = this->nextEntryName();
     if (eof) {
       return false;
     }
 
     this->setValue(value, input);
+    return true;
+  }
+
+  bool attrValue(std::string_view name, auto& value) const {
+    std::cout << "Attr '" << name << "': ";
+    const auto& [inputValue, eof] = this->nextEntryName();
+    if (eof) {
+      return false;
+    }
+
+    this->setValue(value, inputValue);
     return true;
   }
 

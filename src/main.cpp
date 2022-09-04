@@ -1,5 +1,6 @@
 #include <functional>
 
+#include "attr.hpp"
 #include "consoleReadWriter.hpp"
 #include "deserializer.hpp"
 #include "entry.hpp"
@@ -54,17 +55,20 @@ int main() {
   Deserializer deserializer(CinReader{});
 
   auto tree = makeEntry<"Root">(std::tuple{
-    makeEntry<"Int">(5),
+    makeEntry<"Int">(5, makeAttr<"ENABLE">(true)),
     makeEntry<"Str">("Test"),
     makeEntry<"Data">(Data{}),
     makeEntry<"Vec">(std::vector<int>{}),
     makeEntry<"Child">(std::tuple{
-      makeEntry<"Bool">(true),
+      makeEntry<"Bool">(true, makeAttr<"TEST">(15)),
     }),
   });
 
-  auto& val = tree.get<"Root.Child.Bool">();
+  auto& val = tree.get<"Root/Child/Bool">();
   val = false;
+
+  auto& attr = tree.get<"Root/Int/@ENABLE">();
+  attr = false;
 
   serializer.serialize(tree);
   std::cout << '\n' << "Enter entry name:" << std::endl;
@@ -72,6 +76,6 @@ int main() {
 
   std::cout << '\n' << "Result:" << std::endl;
   serializer.serialize(tree);
-  std::cout << tree.get<"Root.Child.Bool">() << std::endl;
+
   return 0;
 }

@@ -31,6 +31,7 @@ class Deserializer {
   }
 
  private:
+  // Lookup entries by name
   template<typename Entry, typename... Entries>
   bool findEntry(const std::string& name, Entry& entry, Entries&... entries) {
     if (this->matchEntry(entry, name)) {
@@ -44,44 +45,55 @@ class Deserializer {
     return false;
   }
 
-  template<StringLiteral Name, typename T>
-  bool matchEntry(const Entry<Name, T>& entry, const std::string& name) const {
+  // Match entry by name
+  template<StringLiteral Name, typename T, typename... Attrs>
+  bool matchEntry(const Entry<Name, T, Attrs...>& entry, const std::string& name) const {
     return name == entry.name;
   }
 
+  // Match Deserializable user class by name
   bool matchEntry(Deserializable<Deserializer<Reader>> auto& entry,
                   const std::string& name) const {
     return name == entry.EntryName;
   }
 
-  template<StringLiteral Name, typename... Args>
-  void processEntry(Entry<Name, std::tuple<Args...>>& entry) {
+  // Process a tuple entry
+  template<StringLiteral Name, typename... Args, typename... Attrs>
+  void processEntry(Entry<Name, std::tuple<Args...>, Attrs...>& entry) {
     std::cout << entry.name << " {" << std::endl;
+    std::apply([this](auto&... attrs) { this->processAttrs(attrs...); }, entry.attrs);
     std::apply([this](auto&... entries) { this->deserialize(entries...); }, entry.value);
   }
 
-  template<StringLiteral Name, typename T>
-  void processEntry(Entry<Name, T>& entry) {
-    std::cout << entry.name << ": ";
+  // Process a simple entry
+  template<StringLiteral Name, typename T, typename... Attrs>
+  void processEntry(Entry<Name, T, Attrs...>& entry) {
+    std::cout << entry.name << ": " << std::endl;
+    std::apply([this](auto&... attrs) { this->processAttrs(attrs...); }, entry.attrs);
     this->processEntry(entry.value);
   }
 
-  template<StringLiteral Name, Deserializable<Deserializer<Reader>> T>
-  void processEntry(Entry<Name, T>& entry) {
+  // Process an entry containing a Deserializable user class
+  template<StringLiteral Name, Deserializable<Deserializer<Reader>> T, typename... Attrs>
+  void processEntry(Entry<Name, T, Attrs...>& entry) {
     std::cout << entry.name << " {" << std::endl;
+    std::apply([this](auto&... attrs) { this->processAttrs(attrs...); }, entry.attrs);
     entry.value.deserialize(*this);
   }
 
+  // Process a reference wrapper
   template<typename T>
   void processEntry(std::reference_wrapper<T>& entry) {
     this->processEntry(entry.get());
   }
 
+  // Process a Deserializable user class
   void processEntry(Deserializable<Deserializer<Reader>> auto& entry) {
     std::cout << entry.EntryName << " {" << std::endl;
     entry.deserialize(*this);
   }
 
+  // Process a collection
   void processEntry(Detail::Collection auto& entries) {
     using T = typename std::decay<decltype(*entries.begin())>::type;
     std::cout << "[" << std::endl;
@@ -92,6 +104,20 @@ class Deserializer {
     }
   }
 
+  template<typename... Attrs>
+  void processAttrs(Attrs&... attrs) {
+    if constexpr (sizeof...(Attrs) > 0) {
+      this->processAttr(attrs...);
+    }
+  }
+
+  template<StringLiteral Name, typename T, typename... Attrs>
+  void processAttr(Attr<Name, T>& attr, Attrs&... attrs) {
+    _reader.attrValue(attr.name, attr.value);
+    this->processAttrs(attrs...);
+  }
+
+  // Fallback
   void processEntry(auto& entry) {
     _reader.value(entry);
   }

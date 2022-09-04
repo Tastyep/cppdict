@@ -1,6 +1,7 @@
 #ifndef CPPDICT_SERIALIZER_HPP
 #define CPPDICT_SERIALIZER_HPP
 
+#include <bits/utility.h>
 #include <tuple>
 #include <type_traits>
 #include <utility>
@@ -23,6 +24,7 @@ class Serializer {
   }
 
  private:
+  // Tuple entry
   template<StringLiteral Name, typename... Entries>
   void serializeEntry(const Entry<Name, std::tuple<Entries...>>& entry) {
     _writer.writeObjStartElement(entry.name);
@@ -30,6 +32,7 @@ class Serializer {
     _writer.writeObjEndElement();
   }
 
+  // Collection entry
   template<StringLiteral Name, Detail::Collection Range>
   void serializeEntry(const Entry<Name, Range>& entry) {
     _writer.writeArrayStartElement(entry.name);
@@ -39,19 +42,29 @@ class Serializer {
     _writer.writeArrayEndElement();
   }
 
-  template<StringLiteral Name, typename T>
+  // Simple entry
+  template<StringLiteral Name, typename T, typename... Attrs>
   requires(!Serializable<T, Serializer<Writer>> &&
-           !Detail::Collection<T>) void serializeEntry(const Entry<Name, T>& entry) {
+           !Detail::Collection<T>) void serializeEntry(const Entry<Name, T, Attrs...>& entry) {
+    // TODO: provide _writer.write(entry.name)
     _writer.write(entry.name, entry.value);
+    if constexpr (sizeof...(Attrs) > 0) {
+      this->serializeAttributes(entry.attrs);
+    }
   }
 
-  template<StringLiteral Name, Serializable<Serializer<Writer>> T>
-  void serializeEntry(const Entry<Name, T>& entry) {
+  // Serializable object entry
+  template<StringLiteral Name, Serializable<Serializer<Writer>> T, typename... Attrs>
+  void serializeEntry(const Entry<Name, T, Attrs...>& entry) {
     _writer.writeObjStartElement(entry.name);
+    if constexpr (sizeof...(Attrs) > 0) {
+      this->serializeAttributes(entry.attrs);
+    }
     entry.value.serialize(*this);
     _writer.writeObjEndElement();
   }
 
+  // Serializale object
   void serializeEntry(const Serializable<Serializer<Writer>> auto& entry) {
     _writer.writeObjStartElement(entry.EntryName);
     entry.serialize(*this);
@@ -60,6 +73,21 @@ class Serializer {
 
   void serializeEntry(const auto& entry) {
     _writer.writeValue(entry);
+  }
+
+  template<typename... Attrs>
+  void serializeAttributes(std::tuple<Attrs...> attrTuple) {
+    _writer.writeAttrStartElement();
+    std::apply([this](auto&... attrs) { this->serializeAttributes(attrs...); }, attrTuple);
+    _writer.writeAttrEndElement();
+  }
+
+  template<typename Attr, typename... Attrs>
+  void serializeAttributes(const Attr& attr, const Attrs&... attrs) {
+    _writer.writeAttr(attr.name, attr.value);
+    if constexpr (sizeof...(attrs) > 0) {
+      this->serializeAttributes(attrs...);
+    }
   }
 
  private:
