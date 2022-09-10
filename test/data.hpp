@@ -1,10 +1,7 @@
 #include <functional>
 
 #include "attr.hpp"
-#include "consoleReadWriter.hpp"
-#include "deserializer.hpp"
 #include "entry.hpp"
-#include "serializer.hpp"
 
 template<typename T>
 using ref = std::reference_wrapper<T>;
@@ -50,10 +47,7 @@ class Data {
   std::vector<NamedData> _otherData;
 };
 
-int main() {
-  Serializer serializer(CoutWriter{});
-  Deserializer deserializer(CinReader{});
-
+auto make_data() {
   auto tree = makeEntry<"Root">(std::tuple{
     makeEntry<"Int">(5, makeAttr<"ENABLE">(true)),
     makeEntry<"Str">("Test"),
@@ -64,18 +58,6 @@ int main() {
     }),
   });
 
-  auto& val = tree.get<"Root/Child/Bool">();
-  val = false;
 
-  auto& attr = tree.get<"Root/Int/@ENABLE">();
-  attr = false;
-
-  serializer.serialize(tree);
-  std::cout << '\n' << "Enter entry name:" << std::endl;
-  deserializer.deserialize(tree);
-
-  std::cout << '\n' << "Result:" << std::endl;
-  serializer.serialize(tree);
-
-  return 0;
+  return tree;
 }

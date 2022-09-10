@@ -1,5 +1,5 @@
-#ifndef CPPDICT_CONSOLE_READ_WRITER_HPP
-#define CPPDICT_CONSOLE_READ_WRITER_HPP
+#ifndef CPPDICT_SERIALIZER_STDCIO_HPP
+#define CPPDICT_SERIALIZER_STDCIO_HPP
 
 #include <concepts>
 #include <ios>
@@ -22,7 +22,7 @@ std::string readInput(std::string_view prefix) {
 template<typename T>
 concept Unspecified = not std::integral<T> and not Detail::IsAnyOf<T, std::string, bool>;
 
-struct CoutWriter {
+struct StdCout {
  public:
   void write(std::string_view name, std::integral auto value) {
     std::cout << _indent << "'" << name << "' (integral) : " << value << std::endl;
@@ -92,7 +92,7 @@ struct CoutWriter {
   std::string _indent;
 };
 
-struct CinReader {
+struct StdCin {
   static constexpr std::string_view prefix = "value: ";
 
   [[nodiscard]] std::pair<std::string, bool> nextEntryName() const {
@@ -146,4 +146,4 @@ struct CinReader {
   }
 };
 
-#endif // !CPPDICT_CONSOLE_READ_WRITER_HPP
+#endif // !CPPDICT_SERIALIZER_STDCIO_HPP
