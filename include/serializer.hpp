@@ -25,16 +25,19 @@ class Serializer {
 
  private:
   // Tuple entry
-  template<StringLiteral Name, typename... Entries>
-  void serializeEntry(const Entry<Name, std::tuple<Entries...>>& entry) {
+  template<StringLiteral Name, typename... Entries, typename... Attrs>
+  void serializeEntry(const Entry<Name, std::tuple<Entries...>, Attrs...>& entry) {
     _writer.writeObjStartElement(entry.name);
+    if constexpr (sizeof...(Attrs) > 0) {
+      this->serializeAttributes(entry.attrs);
+    }
     std::apply([this](const auto&... entries) { this->serialize(entries...); }, entry.value);
     _writer.writeObjEndElement();
   }
 
   // Collection entry
-  template<StringLiteral Name, Detail::Collection Range>
-  void serializeEntry(const Entry<Name, Range>& entry) {
+  template<StringLiteral Name, Detail::Collection Range, typename... Attrs>
+  void serializeEntry(const Entry<Name, Range, Attrs...>& entry) {
     _writer.writeArrayStartElement(entry.name);
     for (const auto& entry : entry.value) {
       this->serializeEntry(entry);
@@ -46,11 +49,12 @@ class Serializer {
   template<StringLiteral Name, typename T, typename... Attrs>
   requires(!Serializable<T, Serializer<Writer>> &&
            !Detail::Collection<T>) void serializeEntry(const Entry<Name, T, Attrs...>& entry) {
-    // TODO: provide _writer.write(entry.name)
-    _writer.write(entry.name, entry.value);
+    _writer.writeEntryStartElement(entry.name);
     if constexpr (sizeof...(Attrs) > 0) {
       this->serializeAttributes(entry.attrs);
     }
+    _writer.writeValue(entry.value);
+    _writer.writeEntryEndElement();
   }
 
   // Serializable object entry

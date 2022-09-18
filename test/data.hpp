@@ -44,20 +44,24 @@ class Data {
  private:
   int _value{ 42 };
   std::string _name{ "Data" };
-  std::vector<NamedData> _otherData;
+  std::vector<NamedData> _otherData{
+    NamedData{},
+    NamedData{},
+  };
 };
 
 auto make_data() {
-  auto tree = makeEntry<"Root">(std::tuple{
-    makeEntry<"Int">(5, makeAttr<"ENABLE">(true)),
-    makeEntry<"Str">("Test"),
-    makeEntry<"Data">(Data{}),
-    makeEntry<"Vec">(std::vector<int>{}),
-    makeEntry<"Child">(std::tuple{
-      makeEntry<"Bool">(true, makeAttr<"TEST">(15)),
-    }),
-  });
-
+  auto tree = makeEntry<"Root">(
+    std::tuple{
+      makeEntry<"Int">(5, makeAttr<"ENABLE">(true)),
+      makeEntry<"Str">("Test"),
+      makeEntry<"Data">(Data{}),
+      makeEntry<"Vec">(std::vector<int>{}),
+      makeEntry<"Child">(std::tuple{
+        makeEntry<"Bool">(true, makeAttr<"TEST">(15)),
+      }),
+    },
+    makeAttr<"IsRoot">(true));
 
   return tree;
 }

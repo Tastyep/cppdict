@@ -10,17 +10,11 @@ int main(void) {
 
   auto tree = make_data();
 
-  auto& val = tree.get<"Root/Child/Bool">();
-  val = false;
-
-  auto& attr = tree.get<"Root/Int/@ENABLE">();
-  attr = false;
-
-  std::cout << '\n' << "Serialization:" << std::endl;
+  std::cout << "[stdcio] Serialization:" << std::endl;
   serializer.serialize(tree);
-  std::cout << '\n' << "Deserialization:" << std::endl;
+  std::cout << '\n' << "[stdcio] Deserialization:" << std::endl;
   deserializer.deserialize(tree);
 
-  std::cout << '\n' << "Serialization:" << std::endl;
+  std::cout << '\n' << "[stdcio] Serialization:" << std::endl;
   serializer.serialize(tree);
 }

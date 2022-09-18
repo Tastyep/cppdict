@@ -2,12 +2,12 @@
 #define CPPDICT_DESERIALIZER
 
 #include <functional>
-#include <iostream>
 #include <string>
 #include <tuple>
 #include <type_traits>
 #include <utility>
 #include <vector>
+#include <iostream>
 
 #include "concepts.hpp"
 #include "entry.hpp"
@@ -20,13 +20,13 @@ class Deserializer {
 
   template<typename... Entries>
   void deserialize(Entries&&... entries) {
-    auto [name, eos] = _reader.nextEntryName();
+    auto [name, valid] = _reader.nextEntryName();
 
-    while (!eos) {
+    while (valid) {
       if (!this->findEntry(name, entries...)) {
-        std::cout << "Not found" << std::endl;
+        std::cerr << "Entry '" << name << "' not found" << std::endl;
       };
-      std::tie(name, eos) = _reader.nextEntryName();
+      std::tie(name, valid) = _reader.nextEntryName();
     }
   }
 
@@ -60,7 +60,6 @@ class Deserializer {
   // Process a tuple entry
   template<StringLiteral Name, typename... Args, typename... Attrs>
   void processEntry(Entry<Name, std::tuple<Args...>, Attrs...>& entry) {
-    std::cout << entry.name << " {" << std::endl;
     std::apply([this](auto&... attrs) { this->processAttrs(attrs...); }, entry.attrs);
     std::apply([this](auto&... entries) { this->deserialize(entries...); }, entry.value);
   }
@@ -68,7 +67,6 @@ class Deserializer {
   // Process a simple entry
   template<StringLiteral Name, typename T, typename... Attrs>
   void processEntry(Entry<Name, T, Attrs...>& entry) {
-    std::cout << entry.name << ": " << std::endl;
     std::apply([this](auto&... attrs) { this->processAttrs(attrs...); }, entry.attrs);
     this->processEntry(entry.value);
   }
@@ -76,7 +74,6 @@ class Deserializer {
   // Process an entry containing a Deserializable user class
   template<StringLiteral Name, Deserializable<Deserializer<Reader>> T, typename... Attrs>
   void processEntry(Entry<Name, T, Attrs...>& entry) {
-    std::cout << entry.name << " {" << std::endl;
     std::apply([this](auto&... attrs) { this->processAttrs(attrs...); }, entry.attrs);
     entry.value.deserialize(*this);
   }
@@ -89,15 +86,13 @@ class Deserializer {
 
   // Process a Deserializable user class
   void processEntry(Deserializable<Deserializer<Reader>> auto& entry) {
-    std::cout << entry.EntryName << " {" << std::endl;
     entry.deserialize(*this);
   }
 
   // Process a collection
   void processEntry(Detail::Collection auto& entries) {
     using T = typename std::decay<decltype(*entries.begin())>::type;
-    std::cout << "[" << std::endl;
-    while (_reader.loadNextEntry()) {
+    while (_reader.nextArrayEntry()) {
       T newEntry;
       this->processEntry(newEntry);
       entries.push_back(std::move(newEntry));

@@ -71,6 +71,14 @@ struct StdCout {
     std::cout << _indent << "]" << std::endl;
   }
 
+  void writeEntryStartElement(std::string_view name) {
+    this->writeObjStartElement(name);
+  }
+
+  void writeEntryEndElement() {
+    this->writeObjEndElement();
+  }
+
   void addIndent(int amount) {
     int indent = _indent.size() + amount;
     _indent = std::string(indent, ' ');
@@ -96,24 +104,20 @@ struct StdCin {
   static constexpr std::string_view prefix = "value: ";
 
   [[nodiscard]] std::pair<std::string, bool> nextEntryName() const {
-    std::string str;
-
-    std::cin >> str;
-    const bool noValue = std::cin.eof() || str == "-";
-
-    return { std::move(str), noValue };
+    std::cout << "Entry name: ";
+    return this->nextInput();
   }
 
-  bool loadNextEntry() const {
+  bool nextArrayEntry() const {
     std::cout << "Next Entry [+/-]: ";
-    const auto& [_, eof] = this->nextEntryName();
-    return !eof;
+    const auto& [_, valid] = this->nextInput();
+    return valid;
   }
 
   bool value(auto& value) const {
     std::cout << "Value: ";
-    const auto& [input, eof] = this->nextEntryName();
-    if (eof) {
+    const auto& [input, valid] = this->nextInput();
+    if (!valid) {
       return false;
     }
 
@@ -123,8 +127,8 @@ struct StdCin {
 
   bool attrValue(std::string_view name, auto& value) const {
     std::cout << "Attr '" << name << "': ";
-    const auto& [inputValue, eof] = this->nextEntryName();
-    if (eof) {
+    const auto& [inputValue, valid] = this->nextInput();
+    if (!valid) {
       return false;
     }
 
@@ -133,6 +137,15 @@ struct StdCin {
   }
 
  private:
+  [[nodiscard]] std::pair<std::string, bool> nextInput() const {
+    std::string str;
+
+    std::cin >> str;
+    const bool noValue = std::cin.eof() || str == "-";
+
+    return { std::move(str), !noValue };
+  }
+  
   void setValue(std::integral auto& value, const std::string& input) const {
     value = std::stoi(input);
   }

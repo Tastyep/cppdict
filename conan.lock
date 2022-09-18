@@ -1,0 +1,496 @@
+{
+ "graph_lock": {
+  "nodes": {
+   "0": {
+    "options": "brotli:enable_debug=False\nbrotli:enable_log=False\nbrotli:enable_portable=False\nbrotli:enable_rbit=True\nbrotli:endianness=None\nbrotli:fPIC=True\nbrotli:shared=False\nbrotli:target_bits=None\nbzip2:build_executable=True\nbzip2:fPIC=True\nbzip2:shared=False\ndouble-conversion:fPIC=True\ndouble-conversion:shared=False\nexpat:char_type=char\nexpat:fPIC=True\nexpat:shared=False\nfontconfig:fPIC=True\nfontconfig:shared=False\nfreetype:fPIC=True\nfreetype:shared=False\nfreetype:subpixel=False\nfreetype:with_brotli=True\nfreetype:with_bzip2=True\nfreetype:with_png=True\nfreetype:with_zlib=True\nicu:dat_package_file=None\nicu:data_packaging=archive\nicu:fPIC=True\nicu:shared=False\nicu:silent=True\nicu:with_dyload=True\nicu:with_extras=False\nicu:with_icuio=True\nicu:with_unit_tests=False\nlibffi:fPIC=True\nlibffi:shared=False\nlibiconv:fPIC=True\nlibiconv:shared=False\nlibjpeg:fPIC=True\nlibjpeg:shared=False\nlibmysqlclient:fPIC=True\nlibmysqlclient:shared=False\nlibmysqlclient:with_ssl=True\nlibmysqlclient:with_zlib=True\nlibpng:api_prefix=\nlibpng:fPIC=True\nlibpng:shared=False\nlibpng:sse=True\nlibpq:disable_rpath=False\nlibpq:fPIC=True\nlibpq:shared=False\nlibpq:with_openssl=False\nlibuuid:fPIC=True\nlibuuid:shared=False\nlibxml2:c14n=True\nlibxml2:catalog=True\nlibxml2:docbook=True\nlibxml2:fPIC=True\nlibxml2:ftp=True\nlibxml2:html=True\nlibxml2:http=True\nlibxml2:iconv=True\nlibxml2:icu=False\nlibxml2:include_utils=True\nlibxml2:iso8859x=True\nlibxml2:legacy=True\nlibxml2:lzma=False\nlibxml2:mem-debug=False\nlibxml2:output=True\nlibxml2:pattern=True\nlibxml2:push=True\nlibxml2:python=False\nlibxml2:reader=True\nlibxml2:regexps=True\nlibxml2:run-debug=False\nlibxml2:sax1=True\nlibxml2:schemas=True\nlibxml2:schematron=True\nlibxml2:shared=False\nlibxml2:threads=True\nlibxml2:tree=True\nlibxml2:valid=True\nlibxml2:writer=True\nlibxml2:xinclude=True\nlibxml2:xpath=True\nlibxml2:xptr=True\nlibxml2:zlib=True\nlz4:fPIC=True\nlz4:shared=False\nmd4c:encoding=utf-8\nmd4c:fPIC=True\nmd4c:shared=False\nodbc:fPIC=True\nodbc:shared=False\nodbc:with_libiconv=True\nopenssl:386=False\nopenssl:enable_weak_ssl_ciphers=False\nopenssl:fPIC=True\nopenssl:no_aria=False\nopenssl:no_asm=False\nopenssl:no_async=False\nopenssl:no_bf=False\nopenssl:no_blake2=False\nopenssl:no_camellia=False\nopenssl:no_cast=False\nopenssl:no_chacha=False\nopenssl:no_cms=False\nopenssl:no_comp=False\nopenssl:no_ct=False\nopenssl:no_deprecated=False\nopenssl:no_des=False\nopenssl:no_dgram=False\nopenssl:no_dh=False\nopenssl:no_dsa=False\nopenssl:no_dso=False\nopenssl:no_ec=False\nopenssl:no_ecdh=False\nopenssl:no_ecdsa=False\nopenssl:no_engine=False\nopenssl:no_filenames=False\nopenssl:no_gost=False\nopenssl:no_hmac=False\nopenssl:no_idea=False\nopenssl:no_md4=False\nopenssl:no_md5=False\nopenssl:no_mdc2=False\nopenssl:no_ocsp=False\nopenssl:no_pinshared=False\nopenssl:no_rc2=False\nopenssl:no_rfc3779=False\nopenssl:no_rmd160=False\nopenssl:no_rsa=False\nopenssl:no_seed=False\nopenssl:no_sha=False\nopenssl:no_sm2=False\nopenssl:no_sm3=False\nopenssl:no_sm4=False\nopenssl:no_sock=False\nopenssl:no_srp=False\nopenssl:no_srtp=False\nopenssl:no_sse2=False\nopenssl:no_ssl=False\nopenssl:no_ssl3=False\nopenssl:no_stdio=False\nopenssl:no_tests=False\nopenssl:no_threads=False\nopenssl:no_tls1=False\nopenssl:no_ts=False\nopenssl:no_whirlpool=False\nopenssl:openssldir=None\nopenssl:shared=False\npcre2:build_pcre2_16=True\npcre2:build_pcre2_32=True\npcre2:build_pcre2_8=True\npcre2:build_pcre2grep=True\npcre2:fPIC=True\npcre2:grep_support_callout_fork=True\npcre2:shared=False\npcre2:support_jit=False\npcre2:with_bzip2=True\npcre2:with_zlib=True\nqt:commercial=False\nqt:config=None\nqt:cross_compile=None\nqt:device=None\nqt:gui=True\nqt:multiconfiguration=False\nqt:opengl=desktop\nqt:openssl=True\nqt:qt3d=False\nqt:qtactiveqt=False\nqt:qtandroidextras=False\nqt:qtcharts=False\nqt:qtconnectivity=False\nqt:qtdatavis3d=False\nqt:qtdeclarative=False\nqt:qtdoc=False\nqt:qtgamepad=False\nqt:qtgraphicaleffects=False\nqt:qtimageformats=False\nqt:qtlocation=False\nqt:qtlottie=False\nqt:qtmacextras=False\nqt:qtmultimedia=False\nqt:qtnetworkauth=False\nqt:qtpurchasing=False\nqt:qtquick3d=False\nqt:qtquickcontrols=False\nqt:qtquickcontrols2=False\nqt:qtquicktimeline=False\nqt:qtremoteobjects=False\nqt:qtscript=False\nqt:qtscxml=False\nqt:qtsensors=False\nqt:qtserialbus=False\nqt:qtserialport=False\nqt:qtspeech=False\nqt:qtsvg=False\nqt:qttools=False\nqt:qttranslations=False\nqt:qtvirtualkeyboard=False\nqt:qtwayland=False\nqt:qtwebchannel=False\nqt:qtwebengine=False\nqt:qtwebglplugin=False\nqt:qtwebsockets=False\nqt:qtwebview=False\nqt:qtwinextras=False\nqt:qtx11extras=False\nqt:qtxmlpatterns=False\nqt:shared=False\nqt:sysroot=None\nqt:widgets=True\nqt:with_dbus=False\nqt:with_doubleconversion=True\nqt:with_fontconfig=True\nqt:with_freetype=True\nqt:with_glib=False\nqt:with_gssapi=False\nqt:with_harfbuzz=False\nqt:with_icu=True\nqt:with_libjpeg=libjpeg\nqt:with_libpng=True\nqt:with_md4c=True\nqt:with_mysql=True\nqt:with_odbc=True\nqt:with_pcre2=True\nqt:with_pq=True\nqt:with_sqlite3=True\nqt:with_vulkan=False\nqt:with_zstd=True\nsqlite3:build_executable=True\nsqlite3:disable_gethostuuid=False\nsqlite3:enable_column_metadata=True\nsqlite3:enable_dbpage_vtab=False\nsqlite3:enable_dbstat_vtab=False\nsqlite3:enable_default_secure_delete=False\nsqlite3:enable_default_vfs=True\nsqlite3:enable_explain_comments=False\nsqlite3:enable_fts3=False\nsqlite3:enable_fts3_parenthesis=False\nsqlite3:enable_fts4=False\nsqlite3:enable_fts5=False\nsqlite3:enable_json1=False\nsqlite3:enable_math_functions=True\nsqlite3:enable_preupdate_hook=False\nsqlite3:enable_rtree=True\nsqlite3:enable_soundex=False\nsqlite3:enable_unlock_notify=True\nsqlite3:fPIC=True\nsqlite3:max_blob_size=None\nsqlite3:max_column=None\nsqlite3:max_variable_number=None\nsqlite3:omit_deprecated=False\nsqlite3:omit_load_extension=False\nsqlite3:shared=False\nsqlite3:threadsafe=1\nsqlite3:use_alloca=False\nwayland:enable_dtd_validation=True\nwayland:enable_libraries=True\nwayland:fPIC=True\nwayland:shared=False\nxkbcommon:fPIC=True\nxkbcommon:shared=False\nxkbcommon:with_wayland=True\nxkbcommon:with_x11=True\nxkbcommon:xkbregistry=True\nzlib:fPIC=True\nzlib:shared=False\nzstd:fPIC=True\nzstd:shared=False\nzstd:threading=True",
+    "requires": [
+     "1"
+    ],
+    "path": "../conanfile.txt",
+    "context": "host"
+   },
+   "1": {
+    "ref": "qt/5.15.5",
+    "options": "commercial=False\nconfig=None\ncross_compile=None\ndevice=None\ngui=True\nmulticonfiguration=False\nopengl=desktop\nopenssl=True\nqt3d=False\nqtactiveqt=False\nqtandroidextras=False\nqtcharts=False\nqtconnectivity=False\nqtdatavis3d=False\nqtdeclarative=False\nqtdoc=False\nqtgamepad=False\nqtgraphicaleffects=False\nqtimageformats=False\nqtlocation=False\nqtlottie=False\nqtmacextras=False\nqtmultimedia=False\nqtnetworkauth=False\nqtpurchasing=False\nqtquick3d=False\nqtquickcontrols=False\nqtquickcontrols2=False\nqtquicktimeline=False\nqtremoteobjects=False\nqtscript=False\nqtscxml=False\nqtsensors=False\nqtserialbus=False\nqtserialport=False\nqtspeech=False\nqtsvg=False\nqttools=False\nqttranslations=False\nqtvirtualkeyboard=False\nqtwayland=False\nqtwebchannel=False\nqtwebengine=False\nqtwebglplugin=False\nqtwebsockets=False\nqtwebview=False\nqtwinextras=False\nqtx11extras=False\nqtxmlpatterns=False\nshared=False\nsysroot=None\nwidgets=True\nwith_dbus=False\nwith_doubleconversion=True\nwith_fontconfig=True\nwith_freetype=True\nwith_glib=False\nwith_gssapi=False\nwith_harfbuzz=False\nwith_icu=True\nwith_libjpeg=libjpeg\nwith_libpng=True\nwith_md4c=True\nwith_mysql=True\nwith_odbc=True\nwith_pcre2=True\nwith_pq=True\nwith_sqlite3=True\nwith_vulkan=False\nwith_zstd=True\nbrotli:enable_debug=False\nbrotli:enable_log=False\nbrotli:enable_portable=False\nbrotli:enable_rbit=True\nbrotli:endianness=None\nbrotli:fPIC=True\nbrotli:shared=False\nbrotli:target_bits=None\nbzip2:build_executable=True\nbzip2:fPIC=True\nbzip2:shared=False\ndouble-conversion:fPIC=True\ndouble-conversion:shared=False\nexpat:char_type=char\nexpat:fPIC=True\nexpat:shared=False\nfontconfig:fPIC=True\nfontconfig:shared=False\nfreetype:fPIC=True\nfreetype:shared=False\nfreetype:subpixel=False\nfreetype:with_brotli=True\nfreetype:with_bzip2=True\nfreetype:with_png=True\nfreetype:with_zlib=True\nicu:dat_package_file=None\nicu:data_packaging=archive\nicu:fPIC=True\nicu:shared=False\nicu:silent=True\nicu:with_dyload=True\nicu:with_extras=False\nicu:with_icuio=True\nicu:with_unit_tests=False\nlibffi:fPIC=True\nlibffi:shared=False\nlibiconv:fPIC=True\nlibiconv:shared=False\nlibjpeg:fPIC=True\nlibjpeg:shared=False\nlibmysqlclient:fPIC=True\nlibmysqlclient:shared=False\nlibmysqlclient:with_ssl=True\nlibmysqlclient:with_zlib=True\nlibpng:api_prefix=\nlibpng:fPIC=True\nlibpng:shared=False\nlibpng:sse=True\nlibpq:disable_rpath=False\nlibpq:fPIC=True\nlibpq:shared=False\nlibpq:with_openssl=False\nlibuuid:fPIC=True\nlibuuid:shared=False\nlibxml2:c14n=True\nlibxml2:catalog=True\nlibxml2:docbook=True\nlibxml2:fPIC=True\nlibxml2:ftp=True\nlibxml2:html=True\nlibxml2:http=True\nlibxml2:iconv=True\nlibxml2:icu=False\nlibxml2:include_utils=True\nlibxml2:iso8859x=True\nlibxml2:legacy=True\nlibxml2:lzma=False\nlibxml2:mem-debug=False\nlibxml2:output=True\nlibxml2:pattern=True\nlibxml2:push=True\nlibxml2:python=False\nlibxml2:reader=True\nlibxml2:regexps=True\nlibxml2:run-debug=False\nlibxml2:sax1=True\nlibxml2:schemas=True\nlibxml2:schematron=True\nlibxml2:shared=False\nlibxml2:threads=True\nlibxml2:tree=True\nlibxml2:valid=True\nlibxml2:writer=True\nlibxml2:xinclude=True\nlibxml2:xpath=True\nlibxml2:xptr=True\nlibxml2:zlib=True\nlz4:fPIC=True\nlz4:shared=False\nmd4c:encoding=utf-8\nmd4c:fPIC=True\nmd4c:shared=False\nodbc:fPIC=True\nodbc:shared=False\nodbc:with_libiconv=True\nopenssl:386=False\nopenssl:enable_weak_ssl_ciphers=False\nopenssl:fPIC=True\nopenssl:no_aria=False\nopenssl:no_asm=False\nopenssl:no_async=False\nopenssl:no_bf=False\nopenssl:no_blake2=False\nopenssl:no_camellia=False\nopenssl:no_cast=False\nopenssl:no_chacha=False\nopenssl:no_cms=False\nopenssl:no_comp=False\nopenssl:no_ct=False\nopenssl:no_deprecated=False\nopenssl:no_des=False\nopenssl:no_dgram=False\nopenssl:no_dh=False\nopenssl:no_dsa=False\nopenssl:no_dso=False\nopenssl:no_ec=False\nopenssl:no_ecdh=False\nopenssl:no_ecdsa=False\nopenssl:no_engine=False\nopenssl:no_filenames=False\nopenssl:no_gost=False\nopenssl:no_hmac=False\nopenssl:no_idea=False\nopenssl:no_md4=False\nopenssl:no_md5=False\nopenssl:no_mdc2=False\nopenssl:no_ocsp=False\nopenssl:no_pinshared=False\nopenssl:no_rc2=False\nopenssl:no_rfc3779=False\nopenssl:no_rmd160=False\nopenssl:no_rsa=False\nopenssl:no_seed=False\nopenssl:no_sha=False\nopenssl:no_sm2=False\nopenssl:no_sm3=False\nopenssl:no_sm4=False\nopenssl:no_sock=False\nopenssl:no_srp=False\nopenssl:no_srtp=False\nopenssl:no_sse2=False\nopenssl:no_ssl=False\nopenssl:no_ssl3=False\nopenssl:no_stdio=False\nopenssl:no_tests=False\nopenssl:no_threads=False\nopenssl:no_tls1=False\nopenssl:no_ts=False\nopenssl:no_whirlpool=False\nopenssl:openssldir=None\nopenssl:shared=False\npcre2:build_pcre2_16=True\npcre2:build_pcre2_32=True\npcre2:build_pcre2_8=True\npcre2:build_pcre2grep=True\npcre2:fPIC=True\npcre2:grep_support_callout_fork=True\npcre2:shared=False\npcre2:support_jit=False\npcre2:with_bzip2=True\npcre2:with_zlib=True\nsqlite3:build_executable=True\nsqlite3:disable_gethostuuid=False\nsqlite3:enable_column_metadata=True\nsqlite3:enable_dbpage_vtab=False\nsqlite3:enable_dbstat_vtab=False\nsqlite3:enable_default_secure_delete=False\nsqlite3:enable_default_vfs=True\nsqlite3:enable_explain_comments=False\nsqlite3:enable_fts3=False\nsqlite3:enable_fts3_parenthesis=False\nsqlite3:enable_fts4=False\nsqlite3:enable_fts5=False\nsqlite3:enable_json1=False\nsqlite3:enable_math_functions=True\nsqlite3:enable_preupdate_hook=False\nsqlite3:enable_rtree=True\nsqlite3:enable_soundex=False\nsqlite3:enable_unlock_notify=True\nsqlite3:fPIC=True\nsqlite3:max_blob_size=None\nsqlite3:max_column=None\nsqlite3:max_variable_number=None\nsqlite3:omit_deprecated=False\nsqlite3:omit_load_extension=False\nsqlite3:shared=False\nsqlite3:threadsafe=1\nsqlite3:use_alloca=False\nwayland:enable_dtd_validation=True\nwayland:enable_libraries=True\nwayland:fPIC=True\nwayland:shared=False\nxkbcommon:fPIC=True\nxkbcommon:shared=False\nxkbcommon:with_wayland=True\nxkbcommon:with_x11=True\nxkbcommon:xkbregistry=True\nzlib:fPIC=True\nzlib:shared=False\nzstd:fPIC=True\nzstd:shared=False\nzstd:threading=True",
+    "package_id": "eff6eac7d304b92c3ce1837187d318e504a9d47e",
+    "prev": "0",
+    "modified": true,
+    "requires": [
+     "2",
+     "3",
+     "4",
+     "6",
+     "7",
+     "10",
+     "13",
+     "14",
+     "8",
+     "15",
+     "16",
+     "19",
+     "20",
+     "22",
+     "23",
+     "28",
+     "17",
+     "29"
+    ],
+    "context": "host"
+   },
+   "2": {
+    "ref": "zlib/1.2.12",
+    "options": "fPIC=True\nshared=False",
+    "package_id": "2a19826344ff00be1c04403f2f8e7008ed3a7cc6",
+    "prev": "0",
+    "modified": true,
+    "context": "host"
+   },
+   "3": {
+    "ref": "openssl/1.1.1q",
+    "options": "386=False\nenable_weak_ssl_ciphers=False\nfPIC=True\nno_aria=False\nno_asm=False\nno_async=False\nno_bf=False\nno_blake2=False\nno_camellia=False\nno_cast=False\nno_chacha=False\nno_cms=False\nno_comp=False\nno_ct=False\nno_deprecated=False\nno_des=False\nno_dgram=False\nno_dh=False\nno_dsa=False\nno_dso=False\nno_ec=False\nno_ecdh=False\nno_ecdsa=False\nno_engine=False\nno_filenames=False\nno_gost=False\nno_hmac=False\nno_idea=False\nno_md4=False\nno_md5=False\nno_mdc2=False\nno_ocsp=False\nno_pinshared=False\nno_rc2=False\nno_rfc3779=False\nno_rmd160=False\nno_rsa=False\nno_seed=False\nno_sha=False\nno_sm2=False\nno_sm3=False\nno_sm4=False\nno_sock=False\nno_srp=False\nno_srtp=False\nno_sse2=False\nno_ssl=False\nno_ssl3=False\nno_stdio=False\nno_tests=False\nno_threads=False\nno_tls1=False\nno_ts=False\nno_whirlpool=False\nopenssldir=None\nshared=False",
+    "package_id": "2a19826344ff00be1c04403f2f8e7008ed3a7cc6",
+    "prev": "0",
+    "modified": true,
+    "context": "host"
+   },
+   "4": {
+    "ref": "pcre2/10.40",
+    "options": "build_pcre2_16=True\nbuild_pcre2_32=True\nbuild_pcre2_8=True\nbuild_pcre2grep=True\nfPIC=True\ngrep_support_callout_fork=True\nshared=False\nsupport_jit=False\nwith_bzip2=True\nwith_zlib=True\nbzip2:build_executable=True\nbzip2:fPIC=True\nbzip2:shared=False\nzlib:fPIC=True\nzlib:shared=False",
+    "package_id": "1e889ff4ad9acee130c0f7106b2c310943b0ac11",
+    "prev": "0",
+    "modified": true,
+    "requires": [
+     "2",
+     "5"
+    ],
+    "context": "host"
+   },
+   "5": {
+    "ref": "bzip2/1.0.8",
+    "options": "build_executable=True\nfPIC=True\nshared=False",
+    "package_id": "3cfc45772763dad1237052f26c1fe8b2bae3f7d2",
+    "prev": "0",
+    "modified": true,
+    "context": "host"
+   },
+   "6": {
+    "ref": "double-conversion/3.2.0",
+    "options": "fPIC=True\nshared=False",
+    "package_id": "174df609440df17baf334e1f5953cca909f2ae18",
+    "prev": "0",
+    "modified": true,
+    "context": "host"
+   },
+   "7": {
+    "ref": "freetype/2.12.1",
+    "options": "fPIC=True\nshared=False\nsubpixel=False\nwith_brotli=True\nwith_bzip2=True\nwith_png=True\nwith_zlib=True\nbrotli:enable_debug=False\nbrotli:enable_log=False\nbrotli:enable_portable=False\nbrotli:enable_rbit=True\nbrotli:endianness=None\nbrotli:fPIC=True\nbrotli:shared=False\nbrotli:target_bits=None\nbzip2:build_executable=True\nbzip2:fPIC=True\nbzip2:shared=False\nlibpng:api_prefix=\nlibpng:fPIC=True\nlibpng:shared=False\nlibpng:sse=True\nzlib:fPIC=True\nzlib:shared=False",
+    "package_id": "081e568bb8bac3eeda85a8634d642a47e3f5c966",
+    "prev": "0",
+    "modified": true,
+    "requires": [
+     "8",
+     "2",
+     "5",
+     "9"
+    ],
+    "context": "host"
+   },
+   "8": {
+    "ref": "libpng/1.6.37",
+    "options": "api_prefix=\nfPIC=True\nshared=False\nsse=True\nzlib:fPIC=True\nzlib:shared=False",
+    "package_id": "c50ec4bac288fa759d0037cc4023b4bbefd75ad4",
+    "prev": "0",
+    "modified": true,
+    "requires": [
+     "2"
+    ],
+    "context": "host"
+   },
+   "9": {
+    "ref": "brotli/1.0.9",
+    "options": "enable_debug=False\nenable_log=False\nenable_portable=False\nenable_rbit=True\nendianness=None\nfPIC=True\nshared=False\ntarget_bits=None",
+    "package_id": "3f0baa42aeca28612aef00c266eed18c9ad1e378",
+    "prev": "0",
+    "modified": true,
+    "context": "host"
+   },
+   "10": {
+    "ref": "fontconfig/2.13.93",
+    "options": "fPIC=True\nshared=False\nbrotli:enable_debug=False\nbrotli:enable_log=False\nbrotli:enable_portable=False\nbrotli:enable_rbit=True\nbrotli:endianness=None\nbrotli:fPIC=True\nbrotli:shared=False\nbrotli:target_bits=None\nbzip2:build_executable=True\nbzip2:fPIC=True\nbzip2:shared=False\nexpat:char_type=char\nexpat:fPIC=True\nexpat:shared=False\nfreetype:fPIC=True\nfreetype:shared=False\nfreetype:subpixel=False\nfreetype:with_brotli=True\nfreetype:with_bzip2=True\nfreetype:with_png=True\nfreetype:with_zlib=True\nlibpng:api_prefix=\nlibpng:fPIC=True\nlibpng:shared=False\nlibpng:sse=True\nlibuuid:fPIC=True\nlibuuid:shared=False\nzlib:fPIC=True\nzlib:shared=False",
+    "package_id": "a9116578be8284d841c7fd6ddf7ebe279058069b",
+    "prev": "0",
+    "modified": true,
+    "requires": [
+     "7",
+     "11",
+     "12"
+    ],
+    "build_requires": [
+     "41",
+     "42"
+    ],
+    "context": "host"
+   },
+   "11": {
+    "ref": "expat/2.4.8",
+    "options": "char_type=char\nfPIC=True\nshared=False",
+    "package_id": "a1ba772dbe13186199f7ecf8dde362ba9613ecf7",
+    "prev": "0",
+    "modified": true,
+    "context": "host"
+   },
+   "12": {
+    "ref": "libuuid/1.0.3",
+    "options": "fPIC=True\nshared=False",
+    "package_id": "2a19826344ff00be1c04403f2f8e7008ed3a7cc6",
+    "prev": "0",
+    "modified": true,
+    "build_requires": [
+     "31"
+    ],
+    "context": "host"
+   },
+   "13": {
+    "ref": "icu/71.1",
+    "options": "dat_package_file=None\ndata_packaging=archive\nfPIC=True\nshared=False\nsilent=True\nwith_dyload=True\nwith_extras=False\nwith_icuio=True\nwith_unit_tests=False",
+    "package_id": "aee1dbac4a6cc94d57d6c5ac7af15a40bb6efab4",
+    "prev": "0",
+    "modified": true,
+    "context": "host"
+   },
+   "14": {
+    "ref": "libjpeg/9d",
+    "options": "fPIC=True\nshared=False",
+    "package_id": "2a19826344ff00be1c04403f2f8e7008ed3a7cc6",
+    "prev": "0",
+    "modified": true,
+    "context": "host"
+   },
+   "15": {
+    "ref": "sqlite3/3.39.2",
+    "options": "build_executable=True\ndisable_gethostuuid=False\nenable_column_metadata=True\nenable_dbpage_vtab=False\nenable_dbstat_vtab=False\nenable_default_secure_delete=False\nenable_default_vfs=True\nenable_explain_comments=False\nenable_fts3=False\nenable_fts3_parenthesis=False\nenable_fts4=False\nenable_fts5=False\nenable_json1=False\nenable_math_functions=True\nenable_preupdate_hook=False\nenable_rtree=True\nenable_soundex=False\nenable_unlock_notify=True\nfPIC=True\nmax_blob_size=None\nmax_column=None\nmax_variable_number=None\nomit_deprecated=False\nomit_load_extension=False\nshared=False\nthreadsafe=1\nuse_alloca=False",
+    "package_id": "668a23a956a1ae835b578205ecc8274cfd29ae40",
+    "prev": "0",
+    "modified": true,
+    "context": "host"
+   },
+   "16": {
+    "ref": "libmysqlclient/8.0.29",
+    "options": "fPIC=True\nshared=False\nwith_ssl=True\nwith_zlib=True\nlz4:fPIC=True\nlz4:shared=False\nopenssl:386=False\nopenssl:enable_weak_ssl_ciphers=False\nopenssl:fPIC=True\nopenssl:no_aria=False\nopenssl:no_asm=False\nopenssl:no_async=False\nopenssl:no_bf=False\nopenssl:no_blake2=False\nopenssl:no_camellia=False\nopenssl:no_cast=False\nopenssl:no_chacha=False\nopenssl:no_cms=False\nopenssl:no_comp=False\nopenssl:no_ct=False\nopenssl:no_deprecated=False\nopenssl:no_des=False\nopenssl:no_dgram=False\nopenssl:no_dh=False\nopenssl:no_dsa=False\nopenssl:no_dso=False\nopenssl:no_ec=False\nopenssl:no_ecdh=False\nopenssl:no_ecdsa=False\nopenssl:no_engine=False\nopenssl:no_filenames=False\nopenssl:no_gost=False\nopenssl:no_hmac=False\nopenssl:no_idea=False\nopenssl:no_md4=False\nopenssl:no_md5=False\nopenssl:no_mdc2=False\nopenssl:no_ocsp=False\nopenssl:no_pinshared=False\nopenssl:no_rc2=False\nopenssl:no_rfc3779=False\nopenssl:no_rmd160=False\nopenssl:no_rsa=False\nopenssl:no_seed=False\nopenssl:no_sha=False\nopenssl:no_sm2=False\nopenssl:no_sm3=False\nopenssl:no_sm4=False\nopenssl:no_sock=False\nopenssl:no_srp=False\nopenssl:no_srtp=False\nopenssl:no_sse2=False\nopenssl:no_ssl=False\nopenssl:no_ssl3=False\nopenssl:no_stdio=False\nopenssl:no_tests=False\nopenssl:no_threads=False\nopenssl:no_tls1=False\nopenssl:no_ts=False\nopenssl:no_whirlpool=False\nopenssl:openssldir=None\nopenssl:shared=False\nzlib:fPIC=True\nzlib:shared=False\nzstd:fPIC=True\nzstd:shared=False\nzstd:threading=True",
+    "package_id": "92ec19290d72c54d55ad5c95de400038f85f601f",
+    "prev": "0",
+    "modified": true,
+    "requires": [
+     "3",
+     "2",
+     "17",
+     "18"
+    ],
+    "context": "host"
+   },
+   "17": {
+    "ref": "zstd/1.5.2",
+    "options": "fPIC=True\nshared=False\nthreading=True",
+    "package_id": "782b021ae04def4d8530bde4b8243c2e1608b82b",
+    "prev": "0",
+    "modified": true,
+    "context": "host"
+   },
+   "18": {
+    "ref": "lz4/1.9.3",
+    "options": "fPIC=True\nshared=False",
+    "package_id": "2a19826344ff00be1c04403f2f8e7008ed3a7cc6",
+    "prev": "0",
+    "modified": true,
+    "context": "host"
+   },
+   "19": {
+    "ref": "libpq/14.2",
+    "options": "disable_rpath=False\nfPIC=True\nshared=False\nwith_openssl=False",
+    "package_id": "2a19826344ff00be1c04403f2f8e7008ed3a7cc6",
+    "prev": "0",
+    "modified": true,
+    "context": "host"
+   },
+   "20": {
+    "ref": "odbc/2.3.9",
+    "options": "fPIC=True\nshared=False\nwith_libiconv=True\nlibiconv:fPIC=True\nlibiconv:shared=False",
+    "package_id": "a609010d1204f11cb74a490b0d9e42fe2ba88eb4",
+    "prev": "0",
+    "modified": true,
+    "requires": [
+     "21"
+    ],
+    "build_requires": [
+     "37"
+    ],
+    "context": "host"
+   },
+   "21": {
+    "ref": "libiconv/1.17",
+    "options": "fPIC=True\nshared=False",
+    "package_id": "2a19826344ff00be1c04403f2f8e7008ed3a7cc6",
+    "prev": "0",
+    "modified": true,
+    "context": "host"
+   },
+   "22": {
+    "ref": "xorg/system",
+    "options": "",
+    "package_id": "5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9",
+    "prev": "0",
+    "context": "host"
+   },
+   "23": {
+    "ref": "xkbcommon/1.4.1",
+    "options": "fPIC=True\nshared=False\nwith_wayland=True\nwith_x11=True\nxkbregistry=True\nexpat:char_type=char\nexpat:fPIC=True\nexpat:shared=False\nlibffi:fPIC=True\nlibffi:shared=False\nlibiconv:fPIC=True\nlibiconv:shared=False\nlibxml2:c14n=True\nlibxml2:catalog=True\nlibxml2:docbook=True\nlibxml2:fPIC=True\nlibxml2:ftp=True\nlibxml2:html=True\nlibxml2:http=True\nlibxml2:iconv=True\nlibxml2:icu=False\nlibxml2:include_utils=True\nlibxml2:iso8859x=True\nlibxml2:legacy=True\nlibxml2:lzma=False\nlibxml2:mem-debug=False\nlibxml2:output=True\nlibxml2:pattern=True\nlibxml2:push=True\nlibxml2:python=False\nlibxml2:reader=True\nlibxml2:regexps=True\nlibxml2:run-debug=False\nlibxml2:sax1=True\nlibxml2:schemas=True\nlibxml2:schematron=True\nlibxml2:shared=False\nlibxml2:threads=True\nlibxml2:tree=True\nlibxml2:valid=True\nlibxml2:writer=True\nlibxml2:xinclude=True\nlibxml2:xpath=True\nlibxml2:xptr=True\nlibxml2:zlib=True\nwayland:enable_dtd_validation=True\nwayland:enable_libraries=True\nwayland:fPIC=True\nwayland:shared=False\nzlib:fPIC=True\nzlib:shared=False",
+    "package_id": "72e51e9483986218a13c5f6650b67475a9993dd6",
+    "prev": "0",
+    "modified": true,
+    "requires": [
+     "22",
+     "24",
+     "25",
+     "27"
+    ],
+    "build_requires": [
+     "43",
+     "45",
+     "47"
+    ],
+    "context": "host"
+   },
+   "24": {
+    "ref": "libxml2/2.9.14",
+    "options": "c14n=True\ncatalog=True\ndocbook=True\nfPIC=True\nftp=True\nhtml=True\nhttp=True\niconv=True\nicu=False\ninclude_utils=True\niso8859x=True\nlegacy=True\nlzma=False\nmem-debug=False\noutput=True\npattern=True\npush=True\npython=False\nreader=True\nregexps=True\nrun-debug=False\nsax1=True\nschemas=True\nschematron=True\nshared=False\nthreads=True\ntree=True\nvalid=True\nwriter=True\nxinclude=True\nxpath=True\nxptr=True\nzlib=True\nlibiconv:fPIC=True\nlibiconv:shared=False\nzlib:fPIC=True\nzlib:shared=False",
+    "package_id": "c4a7cacf01760cbd7354b11a55bf653f7df2bf5d",
+    "prev": "0",
+    "modified": true,
+    "requires": [
+     "2",
+     "21"
+    ],
+    "build_requires": [
+     "36"
+    ],
+    "context": "host"
+   },
+   "25": {
+    "ref": "wayland/1.21.0",
+    "options": "enable_dtd_validation=True\nenable_libraries=True\nfPIC=True\nshared=False\nexpat:char_type=char\nexpat:fPIC=True\nexpat:shared=False\nlibffi:fPIC=True\nlibffi:shared=False\nlibiconv:fPIC=True\nlibiconv:shared=False\nlibxml2:c14n=True\nlibxml2:catalog=True\nlibxml2:docbook=True\nlibxml2:fPIC=True\nlibxml2:ftp=True\nlibxml2:html=True\nlibxml2:http=True\nlibxml2:iconv=True\nlibxml2:icu=False\nlibxml2:include_utils=True\nlibxml2:iso8859x=True\nlibxml2:legacy=True\nlibxml2:lzma=False\nlibxml2:mem-debug=False\nlibxml2:output=True\nlibxml2:pattern=True\nlibxml2:push=True\nlibxml2:python=False\nlibxml2:reader=True\nlibxml2:regexps=True\nlibxml2:run-debug=False\nlibxml2:sax1=True\nlibxml2:schemas=True\nlibxml2:schematron=True\nlibxml2:shared=False\nlibxml2:threads=True\nlibxml2:tree=True\nlibxml2:valid=True\nlibxml2:writer=True\nlibxml2:xinclude=True\nlibxml2:xpath=True\nlibxml2:xptr=True\nlibxml2:zlib=True\nzlib:fPIC=True\nzlib:shared=False",
+    "package_id": "ec57519fed07a41a80fb865b7a56260871c02f45",
+    "prev": "0",
+    "modified": true,
+    "requires": [
+     "26",
+     "24",
+     "11"
+    ],
+    "build_requires": [
+     "38",
+     "40"
+    ],
+    "context": "host"
+   },
+   "26": {
+    "ref": "libffi/3.4.2",
+    "options": "fPIC=True\nshared=False",
+    "package_id": "2a19826344ff00be1c04403f2f8e7008ed3a7cc6",
+    "prev": "0",
+    "modified": true,
+    "build_requires": [
+     "30"
+    ],
+    "context": "host"
+   },
+   "27": {
+    "ref": "wayland-protocols/1.26",
+    "options": "",
+    "package_id": "5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9",
+    "prev": "0",
+    "context": "host"
+   },
+   "28": {
+    "ref": "opengl/system",
+    "options": "",
+    "package_id": "5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9",
+    "prev": "0",
+    "context": "host"
+   },
+   "29": {
+    "ref": "md4c/0.4.8",
+    "options": "encoding=utf-8\nfPIC=True\nshared=False",
+    "package_id": "9a865400bfbaca8e440fece82300bffafe94170f",
+    "prev": "0",
+    "modified": true,
+    "context": "host"
+   },
+   "30": {
+    "ref": "gnu-config/cci.20201022",
+    "options": "",
+    "package_id": "5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9",
+    "prev": "0",
+    "context": "host"
+   },
+   "31": {
+    "ref": "libtool/2.4.7",
+    "options": "fPIC=True\nshared=False",
+    "package_id": "ed03dd185916c6a62cfea9667c4eb5fa400961da",
+    "prev": "0",
+    "modified": true,
+    "requires": [
+     "32"
+    ],
+    "build_requires": [
+     "35"
+    ],
+    "context": "host"
+   },
+   "32": {
+    "ref": "automake/1.16.5",
+    "options": "",
+    "package_id": "258f6f05ca54813b3d7180161753df7f9ccf7e1d",
+    "prev": "0",
+    "requires": [
+     "33"
+    ],
+    "context": "host"
+   },
+   "33": {
+    "ref": "autoconf/2.71",
+    "options": "",
+    "package_id": "5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9",
+    "prev": "0",
+    "requires": [
+     "34"
+    ],
+    "context": "host"
+   },
+   "34": {
+    "ref": "m4/1.4.19",
+    "options": "",
+    "package_id": "24647d9fe8ec489125dfbae4b3ebefaf7581674c",
+    "prev": "0",
+    "context": "host"
+   },
+   "35": {
+    "ref": "gnu-config/cci.20210814",
+    "options": "",
+    "package_id": "5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9",
+    "prev": "0",
+    "context": "host"
+   },
+   "36": {
+    "ref": "pkgconf/1.7.4",
+    "options": "enable_lib=False",
+    "package_id": "24647d9fe8ec489125dfbae4b3ebefaf7581674c",
+    "prev": "0",
+    "context": "host"
+   },
+   "37": {
+    "ref": "gnu-config/cci.20201022",
+    "options": "",
+    "package_id": "5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9",
+    "prev": "0",
+    "context": "host"
+   },
+   "38": {
+    "ref": "meson/0.63.1",
+    "options": "",
+    "package_id": "5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9",
+    "prev": "0",
+    "requires": [
+     "39"
+    ],
+    "context": "host"
+   },
+   "39": {
+    "ref": "ninja/1.11.0",
+    "options": "",
+    "package_id": "24647d9fe8ec489125dfbae4b3ebefaf7581674c",
+    "prev": "0",
+    "context": "host"
+   },
+   "40": {
+    "ref": "pkgconf/1.7.4",
+    "options": "enable_lib=False",
+    "package_id": "24647d9fe8ec489125dfbae4b3ebefaf7581674c",
+    "prev": "0",
+    "context": "host"
+   },
+   "41": {
+    "ref": "gperf/3.1",
+    "options": "",
+    "package_id": "24647d9fe8ec489125dfbae4b3ebefaf7581674c",
+    "prev": "0",
+    "context": "host"
+   },
+   "42": {
+    "ref": "pkgconf/1.7.4",
+    "options": "enable_lib=False",
+    "package_id": "24647d9fe8ec489125dfbae4b3ebefaf7581674c",
+    "prev": "0",
+    "context": "host"
+   },
+   "43": {
+    "ref": "meson/0.63.1",
+    "options": "",
+    "package_id": "5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9",
+    "prev": "0",
+    "requires": [
+     "44"
+    ],
+    "context": "host"
+   },
+   "44": {
+    "ref": "ninja/1.11.0",
+    "options": "",
+    "package_id": "24647d9fe8ec489125dfbae4b3ebefaf7581674c",
+    "prev": "0",
+    "context": "host"
+   },
+   "45": {
+    "ref": "bison/3.7.6",
+    "options": "fPIC=True",
+    "package_id": "24b3b757a0d037582b66e4499f0d99576bab4586",
+    "prev": "0",
+    "modified": true,
+    "requires": [
+     "46"
+    ],
+    "build_requires": [
+     "48"
+    ],
+    "context": "host"
+   },
+   "46": {
+    "ref": "m4/1.4.19",
+    "options": "",
+    "package_id": "24647d9fe8ec489125dfbae4b3ebefaf7581674c",
+    "prev": "0",
+    "context": "host"
+   },
+   "47": {
+    "ref": "pkgconf/1.7.4",
+    "options": "enable_lib=False",
+    "package_id": "24647d9fe8ec489125dfbae4b3ebefaf7581674c",
+    "prev": "0",
+    "context": "host"
+   },
+   "48": {
+    "ref": "flex/2.6.4",
+    "options": "fPIC=True\nshared=False",
+    "package_id": "24b3b757a0d037582b66e4499f0d99576bab4586",
+    "prev": "0",
+    "modified": true,
+    "requires": [
+     "46"
+    ],
+    "context": "host"
+   }
+  },
+  "revisions_enabled": false
+ },
+ "version": "0.4",
+ "profile_host": "[settings]\narch=x86_64\narch_build=x86_64\nbuild_type=Release\ncompiler=gcc\ncompiler.libcxx=libstdc++11\ncompiler.version=12\nos=Linux\nos_build=Linux\n[options]\n[build_requires]\n[env]\n"
+}

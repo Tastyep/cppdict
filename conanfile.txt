@@ -1,0 +1,6 @@
+[requires]
+qt/5.15.5
+
+
+[generators]
+cmake
