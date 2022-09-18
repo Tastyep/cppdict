@@ -2,12 +2,12 @@
 #define CPPDICT_DESERIALIZER
 
 #include <functional>
+#include <iostream>
 #include <string>
 #include <tuple>
 #include <type_traits>
 #include <utility>
 #include <vector>
-#include <iostream>
 
 #include "concepts.hpp"
 #include "entry.hpp"
@@ -91,6 +91,8 @@ class Deserializer {
 
   // Process a collection
   void processEntry(Detail::Collection auto& entries) {
+    entries.clear();
+
     using T = typename std::decay<decltype(*entries.begin())>::type;
     while (_reader.nextArrayEntry()) {
       T newEntry;
